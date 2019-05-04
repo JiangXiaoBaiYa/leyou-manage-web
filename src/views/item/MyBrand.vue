@@ -1,5 +1,6 @@
 <template xmlns:v-slot="http://www.w3.org/1999/XSL/Transform">
     <div>
+
         <v-data-table
                 :headers="headers"
                 :items="brands"
@@ -9,12 +10,17 @@
                 class="elevation-1"
         >
             <template v-slot:items="props">
-                <tr>
-                    <td class="text-xs-center">{{ props.item.id}}</td>
-                    <td class="text-xs-center">{{ props.item.name }}</td>
-                    <td class="text-xs-center">{{ props.item.image }}</td>
-                    <td class="text-xs-center">{{ props.item.letter }}</td>
-                </tr>
+                <td class="text-xs-center">{{ props.item.id }}</td>
+                <td class="text-xs-center">{{ props.item.name }}</td>
+                <td class="text-xs-center">{{ props.item.image }}</td>
+                <td class="text-xs-center">{{ props.item.letter }}</td>
+                <td class="text-xs-center">
+                    <v-btn color="warning" fab flat append>
+                        <v-icon>fas fa-edit</v-icon>
+                    </v-btn>
+                    <v-btn color="info">Info</v-btn>
+                </td>
+
             </template>
         </v-data-table>
     </div>
@@ -23,36 +29,46 @@
 <script>
     export default {
         name: "MyBrand",
-        data() {
+        data () {
             return {
-                totalBrands: 20, // 总条数
-                brands: [], // 当前页品牌数据
-                loading: true, // 是否在加载中
-                pagination: {}, // 分页信息
+                totalBrands: 0,
+                brands: [],
+                loading: true,
+                pagination: {},
                 headers: [
-                    {text: 'id', align: 'center', value: 'id'},
-                    {text: '名称', align: 'center', sortable: false, value: 'name'},
-                    {text: 'LOGO', align: 'center', sortable: false, value: 'image'},
-                    {text: '首字母', align: 'center', value: 'letter', sortable: true,}
+
+                    {text: '品牌ID', align: 'center',  value: 'id'},
+                    { text: '品牌名称',align: 'center', sortable: false,value: 'name' },
+                    { text: '品牌LOGO', align: 'center',sortable: false,value: 'image' },
+                    { text: '品牌首字母',align: 'center',value: 'letter' },
+                    { text: '操作',align: 'center',value: 'option' },
+
                 ]
             }
         },
-        created(){ // 渲染后执行
-            // 开启加载
+        methods:{
+            getDataFromServer() {
+                //发起请求
+                this.$http.get("/item/brand/page").then(
+                    resp =>{
+                        console.log(resp)
+                    }
+                );
+            }
+        },
+        created() {
             this.loading = true;
-            // 模拟延迟一段时间，随后进行赋值
             setTimeout(() => {
-                // 然后赋值给brands
                 this.brands = [
-                    {"id": 2032,"name": "OPPO", "image": "1.jpg","letter": "O"},
-                    {"id": 2033, "name": "飞利浦","image": "2.jpg", "letter": "F"},
-                    {"id": 2034,"name": "华为","image": "3.jpg","letter": "H"},
-                    {"id": 2036,"name": "酷派","image": "4.jpg","letter": "K"},
-                    {"id": 2037,"name": "魅族","image": "5.jpg","letter": "M"}
+                    {"id": 2032, "name": "OPPO", "image": "1.jpg", "letter": "O"},
+                    {"id": 2033, "name": "飞利浦", "image": "2.jpg", "letter": "F"},
+                    {"id": 2034, "name": "华为", "image": "3.jpg", "letter": "H"},
+                    {"id": 2036, "name": "酷派", "image": "4.jpg", "letter": "K"},
+                    {"id": 2037, "name": "魅族", "image": "5.jpg", "letter": "M"}
                 ];
-                // 完成赋值后，把加载状态赋值为false
                 this.loading = false;
-            },2000)
+            }, 200);
         }
     }
 </script>
+content_copy

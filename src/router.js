@@ -26,7 +26,7 @@ export default new Router({
         // 定义的是路径hash值与组件位置的映射关系
         // 第一个参数：路径hash值，第二个参数：组件的位置，相对于src/views，第三个参数是组件名称
         route("/item/category",'/item/Category',"Category"),
-        route("/item/brand",'/item/MyBrand',"MyBrand"),
+        route("/item/brand",'/item/Brand',"Brand"),
         route("/item/list",'/item/Goods',"Goods"),
         route("/item/specification",'/item/specification/Index',"Specification"),
         route("/user/statistics",'/item/Statistics',"Statistics"),
