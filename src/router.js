@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import VueQuillEditor from 'vue-quill-editor'
 
 
 Vue.use(Router)

@@ -9,12 +9,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "echarts": "^4.1.0",
+    "element-ui": "^2.3.2",
+    "iview": "^2.11.0",
     "vue": "^2.6.6",
     "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.5.5",
-    "element-ui": "^2.3.2",
-    "iview": "^2.11.0"
+    "vuetify": "^1.5.5"
   },
   "devDependencies": {
     "@mdi/font": "^3.5.95",
