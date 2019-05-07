@@ -56,7 +56,7 @@
             <span> 修改商品</span>
           </v-tooltip>
           <v-tooltip left>
-            <v-btn icon slot="activator">
+            <v-btn icon slot="activator" @click="deleteGoods(props.item)">
               <i class="el-icon-delete"/>
             </v-btn>
             <span> 删除商品</span>
@@ -220,7 +220,25 @@
       },
       goodsDetail(id){
         this.$message.info("同学，自己也动手写点东西吧。");
-      }
+      },
+
+      deleteGoods(oldGoods) {
+        if (oldGoods.saleable) {
+          // 如果是上架商品，则不允许修改
+          this.$message.error("不能删除上架商品，请先下架！");
+          return;
+        }
+        this.$message.confirm("确认要删除该商品吗？")
+                .then(() => {
+                  this.$http.delete("/item/spu/delete?id="+oldGoods.id)
+                          .then(() => {
+                            this.$message.success("删除成功");
+                            this.getDataFromServer();
+                          }).catch(() => {
+                    this.$message.error("删除失败！");
+                  });
+                })
+      },
     },
     components: {
       GoodsForm
